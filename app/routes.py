@@ -33,7 +33,13 @@ def update_status(task_id):
 
     return jsonify(result)
 
-
+@app.route("/update/<int:task_id>", methods=['PUT'])
+def update(task_id):
+    """ recieves post requests to update new task """
+    data = request.get_json()
+    db_helper.update_task_entry(data['content'],task_id)
+    result = {'success': True, 'response': 'Done'}
+    return jsonify(result)
 
 
 
