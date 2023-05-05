@@ -87,13 +87,16 @@ $(document).ready(function () {
  $('.state').click(function () {
         let state = $(this)
         let tID = state.data('source')
-        let new_state;
+        let new_state = "Todo";
 
-        if (state.text() === "Todo") {
-            new_state = "In Progress"
+        if (state.text() === "In Progress") {
+            new_state = "Complete"
         }
-        else  if (state.text() === "In Progress") {
-            new_state = "Continue"
+        else  if (state.text() === "Complete") {
+            new_state = "Todo"
+        }
+        else if (state.text() === "Todo") {
+            new_state = "In Progress"
         }
        
         console.log(new_state)
