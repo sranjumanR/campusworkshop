@@ -3,6 +3,15 @@ from flask import render_template, request, jsonify
 from app import app
 from app import database as db_helper
 
+@app.route("/edit-text/<int:task_id>", methods=['PUT'])
+def edit_desc(task_id):
+    data = request.get_json()
+    try:
+        db_helper.update_task_entry(task_id, data['description'])
+        result = {'success': True, 'response': 'Updated task'}
+    except:
+        result = {'success': False, 'response': 'Something went wrong'}
+    return jsonify(result)
 
 @app.route("/delete/<int:task_id>", methods=['DELETE'])
 def delete(task_id):
@@ -27,19 +36,14 @@ def update_status(task_id):
             db_helper.update_status_entry(task_id, data["status"])
             result = {'success': True, 'response': 'Status Updated'}
         else:
+            db_helper.update_status_entry(task_id, 'Completed')
             result = {'success': True, 'response': 'Nothing Updated'}
     except:
         result = {'success': False, 'response': 'Something went wrong'}
 
     return jsonify(result)
 
-@app.route("/update/<int:task_id>", methods=['PUT'])
-def update(task_id):
-    """ recieves post requests to update new task """
-    data = request.get_json()
-    db_helper.update_task_entry(data['content'],task_id)
-    result = {'success': True, 'response': 'Done'}
-    return jsonify(result)
+
 
 
 
