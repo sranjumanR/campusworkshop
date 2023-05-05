@@ -1,3 +1,4 @@
+//1st
 $('#edit-task-btn').click(function () {
     const edit = $(this);
     const id = edit.data('id');
@@ -16,7 +17,7 @@ $('#edit-task-btn').click(function () {
     });
   });
   
-  // Accept the changes made by the user and update the database using an AJAX request with a POST or PUT method
+//2nd
   $('#edit-task-btn').click(function () {
     const tID = $('#task-form-display').attr('taskID');
     const content = $('#edit-modal').find('.form-control').val();
